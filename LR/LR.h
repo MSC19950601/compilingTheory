@@ -26,8 +26,8 @@
 						神兽保佑，代码无BUG!
  ************************************************************************/
 
-#ifndef LR_H
-#define LR_H
+#ifndef _LR_H
+#define _LR_H
 
 #include <iostream>
 #include <ctype.h>
@@ -57,7 +57,8 @@ class Prod { // 这里是存放形如X->abc的形式，不存在多个候选式
 		static string cut(const string &in, int i, int j) {
 			return string(in.begin() + i, in.begin() + j);
 		}
-		void display() const;
+		static string replaceAll(const string &in, const string from, const string to);
+		string displayStr() const;
 		Prod(const string &in);
 		Prod(const char &noTerminal, const string& right, const set<char>& additionalVt):
 			noTerminal(noTerminal), right(right), additionalVt(additionalVt) {}
@@ -89,10 +90,6 @@ class Item { // 项目集
 		void add(const string &prod);
 		void display() const;
 };
-
-set<char>Item::Vn; // 全局静态变量
-set<char>Item::Vt;
-set<char>Item::Symbol;
 
 class LR {
 	private:
@@ -127,12 +124,10 @@ class LR {
 		void debug();
 		void loadStr(const string &in); // 读取输入串
 		void parser(); // LR(1)分析
+		void showGrammar(); // 显示输入的文法产生式
+		void drawGraph(); // 画出DFA！
+		void generateDot();
 		void run();
 };
 
-const char*LR::actionStatStr[] = {
-	"acc",
-	"s",
-	"r"
-};
 #endif

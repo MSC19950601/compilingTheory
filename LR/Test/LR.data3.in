@@ -1,6 +1,4 @@
-G->S
-S->S+P|P
-P->P*V|V
-V->i
+S->BB
+B->bB|a
 #
-i+i*i+i
+baba

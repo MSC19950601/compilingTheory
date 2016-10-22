@@ -1,4 +1,10 @@
-S->BB
-B->bB|a
+E->TG
+G->+TG|-TG
+G->@
+T->FS
+S->*FS|/FS
+S->@
+F->(E)
+F->i
 #
-bbabbba
+i+i*i

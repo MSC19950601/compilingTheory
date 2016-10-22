@@ -1,33 +1,32 @@
-	*	+	i	#	G	P	S	V	
-0			s5		1	2	3	4	
-1				acc					
-2	s6	r2		r2					
-3		s7		r0					
-4	r4	r4		r4					
-5	r5	r5		r5					
-6			s5					8	
-7			s5			9		4	
-8	r3	r3		r3					
-9	s6	r1		r1					
-Step	statusStack	parseStack	inStrStack	action
-0	0				i+i*i+i#		SHIFT
-1	05		i		+i*i+i#		REDUCE V->i
-2	04		V		+i*i+i#		REDUCE P->V
-3	02		P		+i*i+i#		REDUCE S->P
-4	03		S		+i*i+i#		SHIFT
-5	037		S+		i*i+i#		SHIFT
-6	0375		S+i		*i+i#		REDUCE V->i
-7	0374		S+V		*i+i#		REDUCE P->V
-8	0379		S+P		*i+i#		SHIFT
-9	03796		S+P*		i+i#		SHIFT
-10	037965		S+P*i		+i#		REDUCE V->i
-11	037968		S+P*V		+i#		REDUCE P->P*V
-12	0379		S+P		+i#		REDUCE S->S+P
-13	03		S		+i#		SHIFT
-14	037		S+		i#		SHIFT
-15	0375		S+i		#		REDUCE V->i
-16	0374		S+V		#		REDUCE P->V
-17	0379		S+P		#		REDUCE S->S+P
-18	03		S		#		REDUCE G->S
-19	01		G		#		ACCEPT
-
+{"Grammar": [
+ "S->BB", "B->bB", "B->a"
+]
+,"parseTable": {
+"Vt": ["a", "b", "#"],
+"Vn": [ "B", "S"],
+"Body": [
+ [ "s3", "s4", "", 1, 2]
+, [ "s6", "s7", "", 5, ""]
+, [ "", "", "acc", "", ""]
+, [ "r2", "r2", "", "", ""]
+, [ "s3", "s4", "", 8, ""]
+, [ "", "", "r0", "", ""]
+, [ "", "", "r2", "", ""]
+, [ "s6", "s7", "", 9, ""]
+, [ "r1", "r1", "", "", ""]
+, [ "", "", "r1", "", ""]
+]}
+,"Graph": {"All": "digraph all{node [shape=box style=filled];Grammar[style=rounded label=\"Grammar\nS->BB\nB->bB\nB->a\n\" ];\nI0[label=\"I0\nS'->.S,#\nS->.BB,#\nB->.bB,a|b\nB->.a,a|b\n\" ];\nI1[label=\"I1\nS->B.B,#\nB->.bB,#\nB->.a,#\n\" ];\nI2[label=\"I2\nS'->S.,#\n\" ];\nI3[label=\"I3\nB->a.,a|b\n\" ];\nI4[label=\"I4\nB->b.B,a|b\nB->.bB,a|b\nB->.a,a|b\n\" ];\nI5[label=\"I5\nS->BB.,#\n\" ];\nI6[label=\"I6\nB->a.,#\n\" ];\nI7[label=\"I7\nB->b.B,#\nB->.bB,#\nB->.a,#\n\" ];\nI8[label=\"I8\nB->bB.,a|b\n\" ];\nI9[label=\"I9\nB->bB.,#\n\" ];\nI0 -> I1[label=\"B\"];I0 -> I2[label=\"S\"];I0 -> I3[label=\"a\"];I0 -> I4[label=\"b\"];I1 -> I5[label=\"B\"];I1 -> I6[label=\"a\"];I1 -> I7[label=\"b\"];I4 -> I8[label=\"B\"];I4 -> I3[label=\"a\"];I4 -> I4[label=\"b\"];I7 -> I9[label=\"B\"];I7 -> I6[label=\"a\"];I7 -> I7[label=\"b\"];Grammar -> I0[style=invis];}"
+, "Simple": "digraph simple {node [shape = circle style=filled];Grammar[shape=box style=rounded label=\"Grammar\nS->BB\nB->bB\nB->a\n\" ];\nI0[tooltip=\"I0\nS'->.S,#\nS->.BB,#\nB->.bB,a|b\nB->.a,a|b\n\" ];\nI1[tooltip=\"I1\nS->B.B,#\nB->.bB,#\nB->.a,#\n\" ];\nI2[tooltip=\"I2\nS'->S.,#\n\" ];\nI3[tooltip=\"I3\nB->a.,a|b\n\" ];\nI4[tooltip=\"I4\nB->b.B,a|b\nB->.bB,a|b\nB->.a,a|b\n\" ];\nI5[tooltip=\"I5\nS->BB.,#\n\" ];\nI6[tooltip=\"I6\nB->a.,#\n\" ];\nI7[tooltip=\"I7\nB->b.B,#\nB->.bB,#\nB->.a,#\n\" ];\nI8[tooltip=\"I8\nB->bB.,a|b\n\" ];\nI9[tooltip=\"I9\nB->bB.,#\n\" ];\nI0 -> I1[label=\"B\"];I0 -> I2[label=\"S\"];I0 -> I3[label=\"a\"];I0 -> I4[label=\"b\"];I1 -> I5[label=\"B\"];I1 -> I6[label=\"a\"];I1 -> I7[label=\"b\"];I4 -> I8[label=\"B\"];I4 -> I3[label=\"a\"];I4 -> I4[label=\"b\"];I7 -> I9[label=\"B\"];I7 -> I6[label=\"a\"];I7 -> I7[label=\"b\"];Grammar -> I0[style=invis];}"},
+"parser": [
+{"statusStack": " 0 ", "parseStack": "", "inStrStack": "baba#", "action": "SHIFT"}
+, {"statusStack": " 0  4 ", "parseStack": "b", "inStrStack": "aba#", "action": "SHIFT"}
+, {"statusStack": " 0  4  3 ", "parseStack": "ba", "inStrStack": "ba#", "action": "REDUCE B->a"}
+, {"statusStack": " 0  4  8 ", "parseStack": "bB", "inStrStack": "ba#", "action": "REDUCE B->bB"}
+, {"statusStack": " 0  1 ", "parseStack": "B", "inStrStack": "ba#", "action": "SHIFT"}
+, {"statusStack": " 0  1  7 ", "parseStack": "Bb", "inStrStack": "a#", "action": "SHIFT"}
+, {"statusStack": " 0  1  7  6 ", "parseStack": "Bba", "inStrStack": "#", "action": "REDUCE B->a"}
+, {"statusStack": " 0  1  7  9 ", "parseStack": "BbB", "inStrStack": "#", "action": "REDUCE B->bB"}
+, {"statusStack": " 0  1  5 ", "parseStack": "BB", "inStrStack": "#", "action": "REDUCE S->BB"}
+, {"statusStack": " 0  2 ", "parseStack": "S", "inStrStack": "#", "action": "ACCEPT"}]
+}
